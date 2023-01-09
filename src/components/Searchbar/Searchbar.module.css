@@ -32,7 +32,7 @@
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  background-image: url('https://cdn-icons-png.flaticon.com/512/2997/2997940.png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -46,7 +46,7 @@
   opacity: 1;
 }
 
-.buttonLabel {
+.btnLabel {
   position: absolute;
   width: 1px;
   height: 1px;
