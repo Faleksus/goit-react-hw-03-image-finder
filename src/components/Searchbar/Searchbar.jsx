@@ -9,27 +9,25 @@ export class Searchbar extends Component  {
   }
 
   handleInputChange = event => {
-    this.setState({ query: event.target.value })
+    this.setState({ query: event.target.value });
   }
 
   handleSubmit = event => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const { query } = this.state;
+    this.props.onSubmit(this.state.query);
+    this.reset();
+  }
 
-    if(query === '') {
-      return
-    }
-
-    this.props.onSubmit(query)
-    this.setState({
-      query: '',
-    })
+  reset = () => {
+    this.setState({ query: '' });
   }
 
   render() {
     const { handleSubmit, handleInputChange } = this;
-    const { query } = this;
+    // Забув дописати state, на 29 рядку, з-за чого не очищався input )))
+    // Деструктуризція зіграла проти мене )))
+    const { query } = this.state;
 
     return (
       <header className={css.searchBar}>
@@ -45,7 +43,7 @@ export class Searchbar extends Component  {
             autofocus
             placeholder="Search images and photos"
             value={query}
-            onInput={handleInputChange}
+            onChange={handleInputChange}
           />
         </form>
       </header>

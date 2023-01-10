@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import Notiflix from 'notiflix';
+
 import { Button } from "./Button/Button";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Searchbar } from "./Searchbar/Searchbar";
@@ -14,7 +16,6 @@ export class App extends Component {
     page: 1,
     query: '',
     totalHits: null,
-    largeImageURL: '',
     isLoading: false,
     error: null,
   };
@@ -39,6 +40,12 @@ export class App extends Component {
             page === 1 ? hits : [...images, ...hits],
           totalHits: totalHits,
         });
+
+        if (!totalHits) {
+          Notiflix.Notify.success(`Images with this name not found :${query}`);
+          return;
+        }
+
       } catch (error) {
         this.setState({
           error: error,

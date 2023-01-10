@@ -6,16 +6,19 @@ import css from './Modal.module.css';
 
 export class Modal extends Component {
 
+  handleBackdrop = event => {
+    // const { onClose } = this.props;
+    console.log('Клик по таргету:', event.target);
+    console.log('Клик по каренттаргету:', event.currentTarget);
 
-
-  handleBackdrop = e => {
-    const { onClose } = this.props;
-    if (e.target === e.currentTarget) onClose();
+    if (event.currentTarget === event.target) {
+      this.props.onClose();
+    }
   };
 
-  handleKeyDown = e => {
+  handleKeyDown = event => {
     const { onClose } = this.props;
-    if (e.key === 'Escape') onClose();
+    if (event.key === 'Escape') onClose();
   };
 
   componentDidMount() {
@@ -33,9 +36,9 @@ export class Modal extends Component {
     const { largeImageURL } = this.props;
 
     return createPortal(
-      <div className={css.overlay} onClick={handleBackdrop}>
+      <div className={css.overlay}>
         <div className={css.modal}>
-          <img src={largeImageURL} alt="" />
+          <img src={largeImageURL} alt="" onClick={handleBackdrop} />
         </div>
       </div>,
       document.querySelector('#portal')
@@ -44,6 +47,6 @@ export class Modal extends Component {
 }
 
 Modal.propTypes = {
-  handleBackdrop: propTypes.func.isRequired,
+  handleBackdrop: propTypes.func,
   largeImageURL: propTypes.string.isRequired,
 };
