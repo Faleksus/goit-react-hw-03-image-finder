@@ -23,19 +23,22 @@ export class ImageGalleryItem extends Component {
     const { isModalOpen } = this.state;
 
     return (
-      <li className={css.galleryItem} onClick={onToggleModal}>
-        <img
-          className={css.image}
-          src={webformatURL}
-          alt=""
-        />
-        {isModalOpen && (
-          <Modal
-            largeImageURL={largeImageURL}
-            onClose={onToggleModal}
+
+        <li className={css.galleryItem} onClick={onToggleModal}>
+          <img
+            className={css.image}
+            src={webformatURL}
+            alt=""
           />
-        )}
-      </li>
+          {isModalOpen && (
+            <Modal
+              largeImageURL={largeImageURL}
+              onClose={onToggleModal}
+            />
+          )}
+        </li>
+
+
     )
   }
 }

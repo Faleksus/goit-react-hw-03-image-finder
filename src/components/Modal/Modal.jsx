@@ -7,13 +7,11 @@ import css from './Modal.module.css';
 export class Modal extends Component {
 
   handleBackdrop = event => {
-    // const { onClose } = this.props;
-    console.log('Клик по таргету:', event.target);
-    console.log('Клик по каренттаргету:', event.currentTarget);
-
-    if (event.currentTarget === event.target) {
-      this.props.onClose();
-    }
+    // Щоб не було всплиття подій далі і відкривалась модалка.
+    // Можна замість цього, в ImageGalleryItem dвинести модалку з Li-шки
+    event.stopPropagation();
+    const { onClose } = this.props;
+    if (event.currentTarget === event.target) onClose();
   };
 
   handleKeyDown = event => {
@@ -36,9 +34,9 @@ export class Modal extends Component {
     const { largeImageURL } = this.props;
 
     return createPortal(
-      <div className={css.overlay}>
+      <div className={css.overlay} onClick={handleBackdrop}>
         <div className={css.modal}>
-          <img src={largeImageURL} alt="" onClick={handleBackdrop} />
+          <img src={largeImageURL} alt=""/>
         </div>
       </div>,
       document.querySelector('#portal')
